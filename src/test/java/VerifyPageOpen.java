@@ -55,7 +55,7 @@ public class VerifyPageOpen {
         } else {
             System.out.println("Checkbox is not selected");
         }
-        //filed as masked password filled
+        //masked password filled
         driver.findElement(By.id("password")).sendKeys("cd");
         WebElement passwordField = driver.findElement(By.id("password"));
         String password = passwordField.getAttribute("value");
@@ -77,7 +77,7 @@ public class VerifyPageOpen {
         WebElement selectelement2 = driver.findElement(By.id("years"));
         Select select2 = new Select(selectelement2);
         select2.selectByIndex(28);
-        // how to check if this element are sleected corretly
+        // check if this element are sleected corretly
 
         driver.findElement(By.id("newsletter")).click();
         WebElement checkbox1 = driver.findElement(By.id("newsletter"));
@@ -116,10 +116,6 @@ public class VerifyPageOpen {
         String expectedText2 = "ACCOUNT CREATED!";
         assertEquals(expectedText2, actualText2);
 
-        /* driver.findElement(By.xpath("//a[contains(text(),'Continue')]")).click();
-              System.out.println(driver.getCurrentUrl());
-            Thread.sleep(1000);
-          driver.findElement(By.xpath("//header/div[1]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[5]/a[1]/i[1]")).click();*/
 
         WebElement body = driver.findElement(By.xpath("/html/body"));
         Dimension bodySize = body.getSize();
