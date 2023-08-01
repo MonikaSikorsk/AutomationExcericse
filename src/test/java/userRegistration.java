@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class VerifyPageOpen {
+public class userRegistration {
     private WebDriver driver;
 
     @Before
@@ -18,7 +18,6 @@ public class VerifyPageOpen {
         driver = new ChromeDriver();
         driver.navigate().to("https://automationexercise.com/");
         driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test
@@ -36,8 +35,13 @@ public class VerifyPageOpen {
         // Verify that the text is what we expected
         String expectedText = "New User Signup!";
         assertEquals(expectedText, actualText);
-        driver.findElement(By.xpath("//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[2]")).sendKeys("Monika");
-        driver.findElement(By.xpath("//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[3]")).sendKeys("email8@adres.pl");
+
+        String name = "Monika";
+        String mail = "email@adres.com";
+        String password = "Password1!";
+
+        driver.findElement(By.xpath("//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[2]")).sendKeys(name);
+        driver.findElement(By.xpath("//body/section[@id='form']/div[1]/div[1]/div[3]/div[1]/form[1]/input[3]")).sendKeys(mail);
         driver.findElement(By.xpath("//button[contains(text(),'Signup')]")).click();
         // getting name of page
         System.out.println(driver.getCurrentUrl());
@@ -56,28 +60,29 @@ public class VerifyPageOpen {
             System.out.println("Checkbox is not selected");
         }
         //masked password filled
-        driver.findElement(By.id("password")).sendKeys("cd");
+        driver.findElement(By.id("password")).sendKeys(password);
         WebElement passwordField = driver.findElement(By.id("password"));
-        String password = passwordField.getAttribute("value");
-        if (password.isEmpty()) {
+        String password1 = passwordField.getAttribute("value");
+        if (password1.isEmpty()) {
             System.out.println("Password field is empty");
         } else {
             System.out.println("Password field is filled");
         }
 
         //choose elements in drop list
-        WebElement selectelement = driver.findElement(By.id("days"));
-        Select select = new Select(selectelement);
+        WebElement selectDays = driver.findElement(By.id("days"));
+        Select select = new Select(selectDays);
         select.selectByVisibleText("28");
 
-        WebElement selectelement1 = driver.findElement(By.id("months"));
-        Select select1 = new Select(selectelement1);
+        WebElement selectMonths = driver.findElement(By.id("months"));
+        Select select1 = new Select(selectMonths);
         select1.selectByIndex(5);
 
-        WebElement selectelement2 = driver.findElement(By.id("years"));
-        Select select2 = new Select(selectelement2);
+        WebElement selectYears = driver.findElement(By.id("years"));
+        Select select2 = new Select(selectYears);
         select2.selectByIndex(28);
-        // check if this element are sleected corretly
+        // check if elements are correct
+
 
         driver.findElement(By.id("newsletter")).click();
         WebElement checkbox1 = driver.findElement(By.id("newsletter"));
@@ -99,7 +104,7 @@ public class VerifyPageOpen {
         driver.findElement(By.id("last_name")).sendKeys("S");
 
         WebElement selectelement3 = driver.findElement(By.id("country"));
-        Select select3 = new Select(selectelement);
+        Select select3 = new Select(selectelement3);
         select.selectByVisibleText("1");
 
         driver.findElement(By.id("address1")).sendKeys("A");
@@ -131,9 +136,11 @@ public class VerifyPageOpen {
                 "evt.initMouseEvent('click',true, true, window, 0, 0, 0, " + point.x + ", " + point.y + ", false, false, false, false, 0,null);" +
                 "arguments[0].dispatchEvent(evt);", body);
 
-        driver.findElement(By.cssSelector("div.container div.row div.col-sm-9.col-sm-offset-1 div.pull-right:nth-child(4) > a.btn.btn-primary")).click();
-        //driver.findElement(By.cssSelector("div.header-middle div.container div.row div.col-sm-8 div.shop-menu.pull-right ul.nav.navbar-nav li:nth-child(5) > a:nth-child(1)")).click();
+        driver.findElement(By.xpath("//header/div[1]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[4]/a[1]")).click();
+
         System.out.println(driver.getCurrentUrl());
+        //driver.findElement(By.cssSelector("div.header-middle div.container div.row div.col-sm-8 div.shop-menu.pull-right ul.nav.navbar-nav li:nth-child(5) > a:nth-child(1)")).click();
+
     }
 
     @After
@@ -142,5 +149,6 @@ public class VerifyPageOpen {
     }
 
 }
+
 
 
